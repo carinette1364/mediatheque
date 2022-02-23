@@ -1,0 +1,551 @@
+:root{
+    --noir:#333333;
+    --blanc:#FAF6EC;
+    --jaune:#FAC300;
+    --vert:#BAD200;
+    --bleu:#6BDCC5;
+    --rose:#FF96A0;
+    
+}
+
+
+body{
+    
+    overflow-x: hidden;/*pb de scroll*/
+}
+
+/* 
+----------------------------------------HEADER--------------------------------------------------------------------------- */
+.container_header{
+    width:100vw;
+    /* height:600px; */
+    /*pb taille*/
+}
+/* -------barre logo et connection---------------------------------------------------------------------------------------------- */
+.barre_logo_connection{
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+    width:100vw;
+    height:80px;
+    background-color:var(--noir);
+}
+/* -------div logo et nom médiathèque----------------------------------------------------------------------------------------- */
+.logo_mediatheque{
+    display:flex;
+    align-items: center;
+    margin-left: 70px;
+    width:500px;
+    height:60px;
+    
+}
+/* ---------Logo et nom médiathèque--------------------------------------------------------------------------------------------- */
+.logo_mediatheque i{
+    color:var(--blanc);
+    font-size: 30px;
+}
+.nom_mediatheque{
+    color: var(--blanc);
+    font-size: 35px;
+    font-family: 'Advent Pro';
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-left: 20px;;
+}
+
+/* ---------Connexion médiathèque------------------------------------------------------------------------------------------------------- */
+
+.barre_connexion_mediatheque{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-right: 70px;
+    width: 500px;
+    height: 60px;
+    
+}
+
+
+.barre_connexion_mediatheque i{
+    font-family: FontAwesome;
+    font-size: 30px;
+    color: var(--noir);
+}
+
+.barre_connexion_mediatheque span{
+    font-size: 20px;
+    font-family: "Advent Pro";
+    font-weight: bold;
+}
+
+#user:hover{
+    color: var(--blanc);
+}
+
+
+/*-----------Div Fond Header-------------------------------------------------------------------------------------------------------------*/
+
+.fond_header_img{
+    width:100vw;
+    height: 800px;
+    background-size:cover;
+}
+
+/*--------Fond header barre recherche----------------------------------------------------------------------------------------------*/
+
+.fond_header_recherche{
+    width: 100vw;
+    height: 60px;
+    display:flex;
+    align-items: center;
+    margin-left: 1350px;
+}
+
+.barre_loupe_recherche{
+    width: 500px;
+    height: 30px;
+    display: flex;
+    box-shadow: 0 16px 16px rgb(80, 78, 78);
+    
+}
+
+#recherche{
+    width: 455px;
+    height: 30px;
+    border:none;
+    outline:none;
+}
+
+.loupe{
+    width: 45px;
+    height: 30px;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--noir);
+}
+
+.loupe i{
+    color: var(--blanc);
+    font-size: 20px; 
+}
+
+.loupe i:hover{
+    color:grey;
+}
+
+/*-----header titre médiathèque----------------------------------------------------------------------------------------------*/
+.titre_mediatheque{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+}
+#titre{
+    font-family: 'Advent Pro';
+    font-size: 100px;
+    color:var(--noir);
+    box-shadow: 0 50px 50px rgb(80, 78, 78);
+    /* text-shadow: var(--noir) 0.1em 0.1em 0.2em; */
+    /* filter: drop-shadow(0px 30px 10px var(--noir)); */
+  
+}
+
+#sous_titre{
+    font-family: 'Advent Pro';
+    font-size: 70px;
+    color:var(--noir);
+    font-style: italic;
+}
+
+
+/*---------div nav barre----------------------------------------------------------------------------------------------------------*/
+
+.nav_barre{
+    width: 100vw;
+    height: 150px;
+    background-color: var(--noir);
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.logo_ville{
+    margin-right: 1050px;
+}
+
+.boutons{
+    margin-right: 70px;
+    display:flex;
+    gap:40px;
+}
+
+.btn_nav{
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    border:none;
+    outline:none;
+    font-family: "Advent Pro";
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.btn_nav:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(5px);
+  }
+
+#accueil{
+    background-color: var(--jaune);
+}
+
+#catalogue{
+    background-color: var(--vert);
+}
+
+#infos{
+    background-color: var(--bleu);
+}
+
+#contact{
+    background-color: var(--rose);
+}
+
+/*-------------------------------Container body contenu---------------------------------------------------------------------------*/
+
+
+.container_body_accueil{
+    width:100vw;
+    height:1600px;
+    background-color: var(--jaune);
+    display:flex;
+    justify-content: center;
+}
+
+.slider_coeur_agenda{
+    width:75vw;
+    height: 1600px;
+    background-color: var(--jaune);
+}
+
+/*------------------------------------section slider-----------------------------------------------------------------------------*/
+
+.slider{
+    width:75vw;
+    height: 600px;
+    background-color:black;
+}
+
+.carousel{
+    width:75vw;
+    height: 600px;
+}
+
+/*----------------------------------section coeurs agenda-------------------------------------------------------------------*/
+
+.coeurs_agenda{
+    width: 75vw;
+    height: 900px;
+    background-color: var(--jaune);
+    padding: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.coeurs{
+    width: 900px;
+    height: 800px;
+    background-color: var(--blanc);
+}
+
+.titre_coeurs_agenda{
+    font-family: "Advent Pro";
+    text-align: center;
+    color:var(--noir);
+    margin-top: 20px;
+    font-size: 60px;
+    font-weight: bold;
+    box-shadow: 0 30px 30px rgb(80, 78, 78);
+}
+
+.coeurs_livres{
+    width: 900px;
+    height: 600px;
+    background-color: var(--blanc);
+    margin-top:50px;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.coeurs_cartes_livres{
+    width: 250px;
+    height:600px;
+    background-color:var(--noir);
+}
+
+.cartes_titre{
+    color:var(--blanc);
+    font-family: "Advent Pro";
+    font-size: 30px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.carte_p{
+    color:var(--blanc);
+    font-family: "Advent Pro";
+    font-size: 18px;
+    text-align: center;
+    margin:10px;
+    line-height:160%;
+}
+
+.agenda{
+    width: 300px;
+    height: 800px;
+    background-color: var(--blanc);
+}
+
+.evenements{
+    width: 300px;
+    height: 560px;
+    margin-top:50px;
+    padding:5px;
+    background-color: var(--blanc);
+    font-family: "Advent Pro";
+    color: var(--noir);
+}
+
+.date{
+    font-weight: bold;
+}
+
+/* -----------------------------------------Div container FOOTER---------------------------------------------------------------------------------- */
+
+.container_footer{
+    width:100vw;
+    height:400px;
+    background-color: var(--noir);
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.footer_infos{
+    width: 350px;
+    height: 350px;
+    background-color: var(--noir);
+}
+
+.logo_mediatheque_footer{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 70px;
+    
+}
+.logo_mediatheque_footer i{
+    color:var(--blanc);
+    font-size: 50px;
+    letter-spacing: -4px;
+}
+.nom_mediatheque_footer{
+    color: var(--blanc);
+    font-size: 50px;
+    font-family: 'Advent Pro';
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-top: 15px;
+}
+.infos_footer{
+    margin:50px;
+}
+.infos_footer h3{
+    font-family: "Advent Pro";
+    color:var(--blanc);
+    letter-spacing: 2px;
+}
+
+.infos_footer p{
+    font-family: "Advent Pro";
+    color:var(--blanc);
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+
+.acces_footer h3{
+    font-family: "Advent Pro";
+    color:var(--blanc);
+    letter-spacing: 2px;
+    margin-top: 50px;
+}
+
+.reseaux_footer h3{
+    font-family: "Advent Pro";
+    color:var(--blanc);
+    letter-spacing: 2px;
+    margin-top: 50px;
+}
+.reseaux_footer{
+    display:block;
+}
+.reseaux_footer a i{
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    color: var(--blanc);
+    font-size: 70px;
+    text-align:center;
+    margin-top: 15px;
+    padding:2px;
+}
+
+#facebook i:hover{
+    color:#3b5998;
+    background-color: #FAF6EC;
+}
+
+#instagram i:hover{
+    color: #8a3ab9;
+    background-color: #FAF6EC;
+}
+
+/* -------------------------------------CONTAINER BODY FORMULAIRE CONTACT---------------------------------------------------------------- */
+
+.container_body_contact{
+    width:100vw;
+    height:1600px;
+    background-color: var(--rose);
+    display:flex;
+    justify-content: center;
+}
+
+.form_titre_contact{
+    width:75vw;
+    height: 1600px;
+    background-color: var(--rose);
+   
+}
+
+.form_titre{
+    width: 75vw;
+    height: 200px;
+    background-color:var(--rose);
+    padding:40px;
+}
+
+.form_contact{
+    width: 75vw;
+    height: 1300px;
+    background-color:var(--rose);
+    margin-top: 30px;
+    display:flex;
+    justify-content: center;
+}
+
+.titre_form{
+    font-family: "Advent Pro";
+    text-align: center;
+    color:var(--noir);
+    margin-top: 20px;
+    font-size: 60px;
+    font-weight: bold;
+    box-shadow: 0 30px 30px rgb(80, 78, 78);
+}
+
+.form{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    gap:20px;
+}
+
+.champ{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.form_label{
+    font-family: "Advent Pro";
+    font-size: 40px;
+    color:var(--noir);
+}
+
+.form_input{
+    width: 60vw;
+    height: 80px;
+    border-radius: 5px;
+    border:none;
+    outline:none;
+    padding:10px;
+}
+
+#demande{
+    width: 60vw;
+    height: 250px;
+    border-radius: 5px;
+    border:none;
+    outline:none;
+    padding:10px;
+}
+
+.btn_form{
+    width: 20vw;
+    height: 80px;
+    background-color: var(--noir);
+    font-family: "Advent Pro";
+    font-size: 50px;
+    color:var(--blanc);
+    border-radius: 5px;
+    border:none;
+    outline:none;
+    margin-top: 20px;
+}
+
+.btn_form:hover{
+    color:var(--noir);
+    background-color: var(--blanc);
+}
+
+.btn_form:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(5px);
+}
+
+/*----------------------CONTAINER-BODY-CATALOGUE----------------------------------------------------------------------------------------*/
+
+.container_body_catalogue{
+    width:100vw;
+    height:1600px;
+    background-color: var(--vert);
+    display:flex;
+    justify-content: center;
+}
+
+.container_catalogue{
+    width: 75vw;
+    height: 1600px;
+    background-color: blanchedalmond;
+}
+
+
+
+
+/*----------------------CONTAINER-BODY-INFOS-------------------------------------------------------------------------------------------*/
+
+.container_body_infos{
+    width:100vw;
+    height:1600px;
+    background-color: var(--bleu);
+    display:flex;
+    justify-content: center;
+}
+
+
+
