@@ -21,7 +21,7 @@ if(isset($_POST['btn_add_livre'])){
     $date_achat = htmlentities($_POST['date_achat']);
     $disponibilite = 0;
 
-    //Gestion illustration
+    //Gestion illustration (test githyb)
     $dossier_temporaire = $_FILES['illustration']['tmp_name'];
     $dossier_destination = PATH_ADMIN . 'img/illustration/' . $illustration;
 
