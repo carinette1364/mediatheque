@@ -5,9 +5,10 @@ include '../includes/bdd.php';
 
 <?php
 
-$sql = 'SELECT * FROM usager';
+$sql = 'SELECT * FROM etat';
 $requete = $bdd->query($sql);
-$usagers = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+$etats = $requete->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -58,46 +59,26 @@ $usagers = $requete->fetchAll(PDO::FETCH_ASSOC);
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <?php
             // var_dump($_SESSION);
-            if (isset($_SESSION['error_add_usager']) && ($_SESSION['error_add_usager'] == true)) {
-                alert('danger', "l'usager n'est pas ajouté");
-                unset($_SESSION['error_add_usager']);
+            if (isset($_SESSION['error_add_etat']) && ($_SESSION['error_add_etat'] == true)) {
+                alert('danger', "l'état n'est pas ajouté");
+                unset($_SESSION['error_add_etat']);
             };
 
             ?>
 
             <div class="container">
-                <h1 class="text-center">Ajouter un usager</h1>
+                <h1 class="text-center">Ajouter un état</h1>
                 <form action="action.php" method="POST">
                     <div class="mb-3">
-                        <label for="nom" class="form-label">Nom :</label>
-                        <input type="text" name="nom" class="form-control" id="nom">
-                    </div>
-                    <div class="mb-3">
-                        <label for="prenom" class="form-label">Prénom :</label>
-                        <input type="text" name="prenom" class="form-control" id="prenom">
-                    </div>
-                    <div class="mb-3">
-                        <label for="adresse" class="form-label">Adresse :</label>
-                        <input type="text" name="adresse" class="form-control" id="adresse">
-                    </div>
-                    <div class="mb-3">
-                        <label for="ville" class="form-label">Ville :</label>
-                        <input type="text" name="ville" class="form-control" id="ville">
-                    </div>
-                    <div class="mb-3">
-                        <label for="code_postal" class="form-label">Code postal :</label>
-                        <input type="text" name="code_postal" class="form-control" id="code_postal">
-                    </div>
-                    <div class="mb-3">
-                        <label for="mail" class="form-label">Email :</label>
-                        <input type="email" name="mail" class="form-control" id="mail">
+                        <label for="libelle" class="form-label">Libelle :</label>
+                        <input type="text" name="libelle" class="form-control" id="libelle">
                     </div>
                     <div class="btn d-flex mx-auto" style="width: 200px">
                         <div class="mb-3 text-center">
-                            <input type="submit" name="btn_add_usager" class="btn btn-primary mx-3" value="Ajouter">
+                            <input type="submit" name="btn_add_etat" class="btn btn-primary mx-3" value="Ajouter">
                         </div>
                         <div class="mb-3 text-center">
-                            <a href="<?= URL_ADMIN ?>usager/index.php" class="btn btn-warning">Annuler</a>
+                            <a href="<?= URL_ADMIN ?>etat/index.php" class="btn btn-warning">Annuler</a>
                         </div>
                     </div>
                 </form>

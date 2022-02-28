@@ -52,6 +52,37 @@ if (isset($_GET['id'])) {
         die;
     }
 }
+
+//préselection de toutes les catégories
+$sql = "SELECT * FROM etat";
+$requete = $bdd->query($sql);
+$etats = $requete->fetchAll(PDO::FETCH_ASSOC);
+// var_dump();
+
+//préselection de l'id de l'état de la table état_livre où l'id est celui qu'on a choisi du get
+$sql = "SELECT id_etat FROM etat_livre WHERE id_livre = ?";
+$requete = $bdd->prepare($sql);
+$requete->execute([$id]);
+$etat_livre = $requete->fetchAll(PDO::FETCH_NUM);
+// var_dump($etat_livre);
+// die;
+$etat_id = [];
+
+if (count($etat_livre) >= 1) {
+    //stocke les valeurs reçues dans un seul tableau
+    foreach ($etat_livre as $id_etat) {
+        // var_dump($etat_livre);
+        $etat_id[] = implode('', $id_etat);
+        //implode pour transformer un tableau en string
+        // var_dump($etat_livre);
+        // die;
+    }
+}else{
+    $etat_id = $etat_livre[0];
+}
+    // var_dump($etat_id);
+    // die;
+
 //préselection de toutes les catégories
 $sql = "SELECT * FROM categorie";
 $requete = $bdd->query($sql);
@@ -68,10 +99,9 @@ $categorie_livre = $requete->fetchAll(PDO::FETCH_NUM);
 $categorie_id = [];
 
 if (count($categorie_livre) >= 1) {
-    //stocke les valeurs dans un seul tableau
+    //stocke les valeurs reçues dans un seul tableau
     foreach ($categorie_livre as $id_categorie) {
         // var_dump($categorie_livre);
-       
         $categorie_id[] = implode('', $id_categorie);
         //implode pour transformer un tableau en string
         // var_dump($categorie_livre);
@@ -106,10 +136,39 @@ if (count($auteur_livre) >= 1) {
         // var_dump($auteur_livre);
     }
 }else{
-    $auteur_id = $auteur_livre[0];
+        $auteur_id = $auteur_livre[0];
 }
     // var_dump($auteur_id);
     // die;
+
+    $sql = "SELECT * FROM editeur";
+    $requete = $bdd->query($sql);
+    $editeurs = $requete->fetchAll(PDO::FETCH_ASSOC);
+    // var_dump($editeurs);
+    //préselection de l'id de l'auteur de la table auteur_livre où l'id est celui qu'on a choisi du get
+    $sql = "SELECT id_editeur FROM editeur_livre WHERE id_livre = ?";
+    $requete = $bdd->prepare($sql);
+    $requete->execute([$id]);
+    $editeur_livre = $requete->fetchAll(PDO::FETCH_NUM);
+    // var_dump($editeur_livre);
+    // die;
+    $editeur_id = [];
+    
+    if (count($editeur_livre) >= 1) {
+        //stocke les valeurs dans un seul tableau
+        foreach ($editeur_livre as $id_editeur) {
+    
+            $editeur_id[] = implode('', $id_editeur);
+            //implode pour transformer un tableau en string
+            // var_dump($editeur_livre);
+        }
+    }else{
+        $editeur_id = $editeur_livre[0];
+        // var_dump($editeur_id,$editeur_livre);
+        // die;
+    }
+        // var_dump($editeur_id);
+        // die;
 
 
 
@@ -187,7 +246,6 @@ if (count($auteur_livre) >= 1) {
                         <label for="titre" class="form-label">Titre :</label>
                         <input type="text" name="titre" class="form-control" id="titre" value="<?= $livre['titre'] ?>">
                     </div>
-                    
                     <div class="mb-3">
                         <label for="illustration" class="form-label">illustration :</label>
                         <input type="file" name="illustration" class="form-control" id="illustration" value="<?= $livre['illustration'] ?>">
@@ -199,25 +257,44 @@ if (count($auteur_livre) >= 1) {
                     </div>
                     <div class="row">
                         <div class="mb-3 col">
-                            <label for="cat" class="form-label">Catégories :</label>
-                                <select class="select-categorie" name="categorie[]"  id='cat' multiple>
-                                    <?php foreach($categories as $categorie) : ?>
+                            <label for="etat" class="form-label">Etat :</label>
+                                <select class="select-etat w-50" name="etat[]"  id='etat' multiple>
+                                    <?php foreach($etats as $etat) : ?>
                                         <?php
-                                        // var_dump(in_array($categorie['libelle'], $livre_categorie));
-                                            if (in_array($categorie['id'], $categorie_id)){
+                                            if (in_array($etat['id'], $etat_id)){
                                                 $selected = "selected";
                                             }else{
                                                 $selected = "";
                                             }
-                                            ?>
-                                        <option value="<?= $categorie['id']?>" <?=$selected?>><?= $categorie['libelle'] ?></option>
+                                        ?>
+                                        <option value="<?= $etat['id']?>" <?= $selected ?>><?= $etat['libelle'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <!-- //selected après "php categories id" -->
                         </div>
                         <div class="mb-3 col">
-                            <label for="aut" class="form-label">Auteurs :</label>
-                                <select class="select-auteur" name="auteur[]"  id='aut' multiple>
+                            <label for="categorie" class="form-label">Catégories :</label>
+                                <select class="select-categorie w-50" name="categorie[]"  id='categorie' multiple>
+                                    <?php foreach($categories as $categorie) : ?>
+                                        <?php
+                                        // var_dump(in_array($categorie['libelle'], $livre_categorie));
+                                            if (in_array($categorie['id'], $categorie_id)){
+                                                //si in-array trouve l'id de la catégorie dans le tableau categorie de mon livre ($categorie-id)
+                                                //ça veut dire que mon livre a bien cette catégorie
+                                                $selected = "selected";
+                                            }else{
+                                                $selected = "";
+                                                //$selected = "" à l'intérieur car la variable n'a de portée qu'à l'intérieur de la fonction
+                                            }
+                                        ?>
+                                        <option value="<?= $categorie['id']?>" <?= $selected ?>><?= $categorie['libelle'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="auteur" class="form-label">Auteurs :</label>
+                                <select class="select-auteur w-50" name="auteur[]"  id='auteur' multiple>
                                     <?php foreach($auteurs as $auteur) : ?>
                                         <?php
                                             if (in_array($auteur['id'], $auteur_id)){
@@ -225,17 +302,32 @@ if (count($auteur_livre) >= 1) {
                                             }else{
                                                 $selected = "";
                                             }
-                                            ?>
-                                        <option value="<?= $auteur['id']?>" <?=$selected?>><?= $auteur['nom'] ?></option>
+                                        ?>
+                                        <option value="<?= $auteur['id']?>" <?= $selected ?>><?= $auteur['nom'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <!-- //selected après "php auteurs id" -->
                         </div>
                         <div class="mb-3 col">
+                            <label for="editeur" class="form-label">Editeur :</label>
+                                <select class="select-editeur w-50" name="editeur[]"  id='editeur' multiple>
+                                    <?php foreach($editeurs as $editeur) : ?>
+                                        <?php
+                                            if (in_array($editeur['id'], $editeur_id)){
+                                                $selected = "selected";
+                                            }else{
+                                                $selected = "";
+                                            }
+                                            ?>
+                                        <option value="<?= $editeur['id']?>" <?= $selected ?>><?= $editeur['denomination'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 mt-3 col text-center">
                             <p>Illustration actuelle :</p>
                             <img width = "250px" height = "auto" src="<?= URL_ADMIN ?>img/illustration/<?= $livre['illustration'] ?>" alt="illustration"<?= $livre['titre'] ?>>
                         </div>
-                        
                     </div>
                     <div class="mb-3">
                         <label for="prix" class="form-label">prix :</label>
@@ -276,7 +368,10 @@ if (count($auteur_livre) >= 1) {
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="//cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
     <script>
+        $('.select-etat').select2();
         $('.select-categorie').select2();
         $('.select-auteur').select2();
+        $('.select-editeur').select2();
+        
         CKEDITOR.replace('resume');
     </script>

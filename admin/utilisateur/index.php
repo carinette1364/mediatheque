@@ -14,9 +14,9 @@ if(!isAdmin()) {
 include '../includes/bdd.php';
 // include PATH_ADMIN . 'includes/bdd.php';
 
-// $sql = 'SELECT * FROM utilisateur';
-// $requete = $bdd->query($sql);
-// $utilisateurs = $requete->fetchAll(PDO::FETCH_ASSOC);
+$sql = 'SELECT * FROM utilisateur';
+$requete = $bdd->query($sql);
+$utilisateurs = $requete->fetchAll(PDO::FETCH_ASSOC);
 // var_dump($utilisateurs);
 // die;
 
@@ -36,11 +36,16 @@ include '../includes/bdd.php';
 // INNER JOIN utilisateur ON role_utilisateur.id_utilisateur = utilisateur.id";
 // WHERE role_utilisateur.id_utilisateur = 1
 
-// $sql = 'SELECT * FROM utilisateur';
-// $requete = $bdd->query($sql);
-// $utilisateurs = $requete->fetchAll(PDO::FETCH_ASSOC);
-
+$sql = 'SELECT * FROM utilisateur';
+$requete = $bdd->query($sql);
+$utilisateurs = $requete->fetchAll(PDO::FETCH_ASSOC);
 // var_dump($utilisateurs);
+
+$sql = 'SELECT * FROM role';
+$requete = $bdd->query($sql);
+$roles = $requete->fetchAll(PDO::FETCH_ASSOC);
+// var_dump($roles);
+
 
 ?>
 
@@ -111,6 +116,11 @@ include '../includes/bdd.php';
             unset($_SESSION['error_add_utilisateur']);
         } 
 
+        if (isset($_SESSION['error_delete_utilisateur']) && ($_SESSION['error_delete_utilisateur'] == false)) {
+            alert('success', 'utilisateur bien supprimé');
+            unset($_SESSION['error_delete_utilisateur']);
+        } 
+
         ?>
         
 
@@ -143,7 +153,7 @@ include '../includes/bdd.php';
                         <td><?= $utilisateur['num_telephone'] ?></td>
                         <td><?= $utilisateur['adresse'] . ',' . $utilisateur['ville'] . ',' . $utilisateur['code_postal'] ?></td>
                         <td><img width="75px" height="75px" src="<?= URL_ADMIN ?>img/avatar/<?= $utilisateur['avatar'] ?>" alt=""></td>
-                        <td><?= $utilisateur['libelle'] ?></td>
+                        <td><?= getRoles($utilisateur['id'], $bdd); ?></td>
                         <td><a href="<?= URL_ADMIN ?>utilisateur/update.php?id=<?= $utilisateur['id'] ?>" class="btn btn-warning">Modifier</a></td>
                         <td><a href="<?= URL_ADMIN ?>utilisateur/action.php?id=<?= $utilisateur['id'] ?>" class="btn btn-danger">Supprimer</a></td>
                     </tr>

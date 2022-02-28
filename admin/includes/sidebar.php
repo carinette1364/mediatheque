@@ -117,6 +117,22 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagesEtat"
+        aria-expanded="true" aria-controls="collapsePages">
+        <i class="fas fa-solid fa-signal"></i>
+        <span>Etats</span>
+    </a>
+    <div id="collapsePagesEtat" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Gestion des états:</h6>
+            <a class="collapse-item" href="<?=URL_ADMIN?>etat/index.php">Liste des états</a>
+            <a class="collapse-item" href="<?=URL_ADMIN?>etat/add.php">Ajouter un état</a>
+        </div>
+    </div>
+</li>
+
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagesEditeur"
         aria-expanded="true" aria-controls="collapsePages">
         <i class="fas fa-solid fa-user-tie"></i>
@@ -171,7 +187,7 @@
     </a>
     <div id="collapsePagesUtilisateur" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Gestion des utilisateurs:</h6> -->
+            <h6 class="collapse-header">Gestion des utilisateurs:</h6> 
             <a class="collapse-item" href="<?=URL_ADMIN?>utilisateur/index.php">Liste des utilisateurs</a>
             <a class="collapse-item" href="<?=URL_ADMIN?>utilisateur/add.php">Ajouter un utilisateur</a>
         </div>

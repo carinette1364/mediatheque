@@ -7,20 +7,20 @@ if (isset($_GET['id'])) {
 
     $id = intval($_GET['id']);
     //    var_dump($id);
+    //    die;
     //    die;-> pour vérifier si ça fonctionne
     //2e vérification, un id est toujours supérieur à 0
     if ($id > 0) {
-        //REQUETE SQL POUR RECUPERER L' AUTEUR EN BDD
+        //REQUETE SQL POUR RECUPERER La Catégorie EN BDD
         // $sql = "SELECT * FROM contact WHERE id = " . $_GET['id'];
-        $sql = "SELECT * FROM usager WHERE id = ?"; //? parce qu'on a qu'une valeur, si plusieurs mettre les flags ex :id, :nom etc
+        $sql = "SELECT * FROM etat WHERE id = ?"; //? parce qu'on a qu'une valeur, si plusieurs mettre les flags ex :id, :nom etc
         //le $_GET['id'] c'est celui du html et pas de la base de données, c'est celui qu'on a passé après le ? dans l'adresse du bouton modifier du html
         // var_dump($sql);
         //EXECUTER LA REQUETE
         $requete = $bdd->prepare($sql);
         $requete->execute(array($id));
         //RECUPERATION DES INFOS
-        $usager = $requete->fetch(PDO::FETCH_ASSOC);
-        // var_dump($auteur);
+        $etat = $requete->fetch(PDO::FETCH_ASSOC);
     } else {
         header('location:index.php');
         die;
@@ -28,7 +28,6 @@ if (isset($_GET['id'])) {
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -79,45 +78,25 @@ if (isset($_GET['id'])) {
 
 
             <div class="container">
-                <h1 class="text-center">Modifier un usager</h1>
+                <h1 class="text-center">Modifier une catégorie</h1>
 
-                <?php if (isset($_SESSION['error_update_usager']) && ($_SESSION['error_update_usager'] == true)) {
-                    alert('danger', "l'usager n'est pas modifié");
-                    unset($_SESSION['error_update_usager']);
+                <?php if (isset($_SESSION['error_update_etat']) && ($_SESSION['error_update_etat'] == true)) {
+                    alert('danger', "l'état n'est pas modifié");
+                    unset($_SESSION['error_update_etat']);
                 };
 
                 ?>
 
 
                 <form action="action.php" method="POST">
-                    <input type="hidden" name="id" value="<?= $usager['id'] ?>">
+                    <input type="hidden" name="id" value="<?= $etat['id'] ?>">
                     <div class="mb-3">
-                        <label for="nom" class="form-label">Nom :</label>
-                        <input type="text" name="nom" class="form-control" id="nom" value="<?= $usager['nom'] ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="prenom" class="form-label">Prénom :</label>
-                        <input type="text" name="prenom" class="form-control" id="prenom" value="<?= $usager['prenom'] ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="adresse" class="form-label">Adresse :</label>
-                        <input type="text" name="adresse" class="form-control" id="adresse" value="<?= $usager['adresse'] ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="ville" class="form-label">Ville :</label>
-                        <input type="text" name="ville" class="form-control" id="ville" value="<?= $usager['ville'] ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="code_postal" class="form-label">Code_postal :</label>
-                        <input type="text" name="code_postal" class="form-control" id="code_postal" value="<?= $usager['code_postal'] ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="mail" class="form-label">Email :</label>
-                        <input type="email" name="mail" class="form-control" id="mail" value="<?= $usager['mail'] ?>">
+                        <label for="libelle" class="form-label">Libelle :</label>
+                        <input type="text" name="libelle" class="form-control" id="libelle" value="<?= $etat['libelle'] ?>">
                     </div>
                     <div class="mb-3 text-center">
-                        <input type="submit" name="btn_update_usager" class="btn btn-warning">
-                        <a href="<?= URL_ADMIN ?>usager/index.php" class="btn btn-primary">Annuler</a>
+                        <input type="submit" name="btn_update_etat" class="btn btn-warning">
+                        <a href="<?= URL_ADMIN ?>etat/index.php" class="btn btn-primary">Annuler</a>
                     </div>
                 </form>
             </div>

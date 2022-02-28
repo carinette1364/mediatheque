@@ -11,15 +11,27 @@ include '../includes/bdd.php';
 
 <?php
 
-$sql_cat = "SELECT * FROM categorie";
-$requete = $bdd->query($sql_cat);
+$sql = "SELECT * FROM categorie";
+$requete = $bdd->query($sql);
 $categories = $requete->fetchAll(PDO::FETCH_ASSOC);
 // var_dump($categories);
 
-$sql_aut = "SELECT * FROM auteur";
-$requete = $bdd->query($sql_aut);
+
+$sql = "SELECT * FROM auteur";
+$requete = $bdd->query($sql);
 $auteurs = $requete->fetchAll(PDO::FETCH_ASSOC);
 // var_dump($auteurs);
+
+$sql = "SELECT * FROM editeur";
+$requete = $bdd->query($sql);
+$editeurs = $requete->fetchAll(PDO::FETCH_ASSOC);
+// var_dump($editeurs);
+
+$sql = "SELECT * FROM etat";
+$requete = $bdd->query($sql);
+$etats = $requete->fetchAll(PDO::FETCH_ASSOC);
+// var_dump($etats);
+
 
 ?>
 
@@ -115,8 +127,17 @@ $auteurs = $requete->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                     <div class="row">
                         <div class="mb-3 col">
-                            <label for="cat" class="form-label">Catégories :</label>
-                                <select class="select-categorie" name="categorie[]" multiple id='cat'>
+                            <label for="etat" class="form-label">Etats :</label>
+                                <select class="select-etat" name="etat[]" multiple id='etat'>
+                                    <?php foreach($etats as $etat) : ?>
+                                        <option value="<?= $etat['id']?>"><?= $etat['libelle'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <!-- //selected après "php categories id" -->
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="categorie" class="form-label">Catégories :</label>
+                                <select class="select-categorie" name="categorie[]" multiple id='categorie'>
                                     <?php foreach($categories as $categorie) : ?>
                                         <option value="<?= $categorie['id']?>"><?= $categorie['libelle'] ?></option>
                                     <?php endforeach; ?>
@@ -124,10 +145,18 @@ $auteurs = $requete->fetchAll(PDO::FETCH_ASSOC);
                                 <!-- //selected après "php categories id" -->
                         </div>
                         <div class="mb-3 col">
-                            <label for="aut" class="form-label">Auteurs :</label>
-                                <select class="select-aut" name="auteur[]" multiple id='aut'>
+                            <label for="auteur" class="form-label">Auteurs :</label>
+                                <select class="select-auteur" name="auteur[]" multiple id='auteur'>
                                     <?php foreach($auteurs as $auteur) : ?>
                                         <option value="<?= $auteur['id']?>"><?= $auteur['nom'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="editeur" class="form-label">Editeurs :</label>
+                                <select class="select-editeur" name="editeur[]" multiple id='editeur'>
+                                    <?php foreach($editeurs as $editeur) : ?>
+                                        <option value="<?= $editeur['id']?>"><?= $editeur['denomination'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                         </div>
@@ -164,8 +193,11 @@ $auteurs = $requete->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="//cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
     <script>
+        $('.select-etat').select2();
         $('.select-categorie').select2();
-        
+        $('.select-auteur').select2();
+        $('.select-editeur').select2();
 
+    
         CKEDITOR.replace('resume');
     </script>

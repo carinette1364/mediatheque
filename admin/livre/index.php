@@ -15,6 +15,13 @@ $sql = 'SELECT * FROM livre';
 $requete = $bdd->query($sql);
 $livres = $requete->fetchAll(PDO::FETCH_ASSOC);
 
+// var_dump(getCategories(2, $bdd));
+// var_dump(getAuteurs(2, $bdd ));
+// var_dump(getEtats(2, $bdd ));
+// var_dump(getEditeurs(2, $bdd ));
+
+
+
 
 ?>
 
@@ -81,6 +88,15 @@ $livres = $requete->fetchAll(PDO::FETCH_ASSOC);
             alert('success', 'le livre est bien supprimé');
             unset($_SESSION['error_delete_livre']);
         }
+
+        if (isset($_SESSION['error_delete_livre']) && $_SESSION['error_delete_livre'] == true){
+            alert('danger', 'Le livre n\'est pas supprimé');
+            unset($_SESSION['error_delete_livre']);
+        }
+        if (isset($_SESSION['error_delete_illustration']) && $_SESSION['error_delete_illustration'] == true){
+            alert('danger', 'L\'illustration ne peut être supprimée');
+            unset($_SESSION['error_delete_illustration']);
+        }
         ?>
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
 
@@ -91,12 +107,16 @@ $livres = $requete->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Num_ISBN</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Auteur</th>
+                        <th scope="col">Editeur</th>
                         <th scope="col">Titre</th>
                         <th scope="col">Illustration</th>
                         <th scope="col">Résumé</th>
                         <th scope="col">Prix</th>
                         <th scope="col">Nb_pages</th>
                         <th scope="col">Date_achat</th>
+                        <th scope="col">Etat</th>
                         <th scope="col">Disponibilté</th>
                         <th scope="col">Voir</th>
                         <th scope="col">Modifier</th>
@@ -109,13 +129,16 @@ $livres = $requete->fetchAll(PDO::FETCH_ASSOC);
                             <!-- AFFICHAGE DES CHAMPS -->
                             <th scope="row"><?= $livre['id'] ?></th>
                             <td><?= $livre['num_ISBN'] ?></td>
-                            <td><?= $livre['titre'] ?></a></td>
+                            <td><?= getCategories($livre['id'], $bdd); ?></td>
+                            <td><?= getAuteurs($livre['id'], $bdd); ?></td>
+                            <td><?= getEditeurs($livre['id'], $bdd); ?></td>
+                            <td><?= $livre['titre'] ?></td>
                             <td><img width="75px" height="auto" src="<?= URL_ADMIN ?>img/illustration/<?= $livre['illustration'] ?>" alt=""></td>
                             <td><?= substr(htmlentities($livre['resume']), 0, 110) ?> [...]</td>
                             <td><?= $livre['prix'] ?>€</td>
                             <td><?= $livre['nb_pages'] ?></td>
                             <td><?= $livre['date_achat'] ?></td>
-                            <td><?= $livre['disponibilite'] ?></td>
+                            <td><?= getEtats($livre['id'], $bdd); ?></td>
                             <!-- <td><a href="http://localhost/CRUD_EX/update.php?id=1" class= "btn btn-warning">Modifier</a></td> -->
                             <!-- ce qui suit après le ?, après php dans l'adresse de la page ce qui va suivre ce sont des données après get donc visibles -->
                             <!-- après on vérifie sur la page update avec var_dump $_GET -->

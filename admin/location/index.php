@@ -57,8 +57,44 @@ include '../includes/bdd.php';
         </div>
         <a href="add.php" class="btn btn-success my-3">Ajouter une location</a>
 
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+                <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Livre</th>
+                    <th scope="col">Usager</th>
+                    <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                    </tr>
+                </tbody>
+                </table>
+
+
+        </div>
+
     </div>
     <!-- /.container-fluid -->
+    
 
     <!-- </div> -->
     <!-- End of Main Content -->

@@ -5,11 +5,9 @@ include '../includes/bdd.php';
 
 <?php
 
-$sql = 'SELECT * FROM usager';
+$sql = 'SELECT * FROM etat';
 $requete = $bdd->query($sql);
-$usagers = $requete->fetchAll(PDO::FETCH_ASSOC);
-// var_dump($usagers);
-// die;
+$etats = $requete->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -56,63 +54,46 @@ $usagers = $requete->fetchAll(PDO::FETCH_ASSOC);
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-0 text-gray-800">Liste des usagers</h1>
-        <a href="add.php" class='btn btn-success my-3'>Ajouter un usager</a>
+        <h1 class="h3 mb-0 text-gray-800">Liste des états</h1>
+        <a href="add.php" class='btn btn-success my-3'>Ajouter un état</a>
         <?php
         // var_dump($_SESSION);
 
 
-        if (isset($_SESSION['error_update_usager']) && ($_SESSION['error_update_usager'] == false)) {
-            alert('success', "l'usager est bien modifié");
-            unset($_SESSION['error_update_usager']);
+        if (isset($_SESSION['error_update_etat']) && ($_SESSION['error_update_etat'] == false)) {
+            alert('success', "l'état est bien modifié");
+            unset($_SESSION['error_update_etat']);
         }
 
-        if (isset($_SESSION['error_add_usager']) && ($_SESSION['error_add_usager'] == false)) {
-            alert('success', "l'usager est bien ajouté");
-            unset($_SESSION['error_add_usager']);
+        if (isset($_SESSION['error_add_etat']) && ($_SESSION['error_add_etat'] == false)) {
+            alert('success', "l'état est bien ajouté");
+            unset($_SESSION['error_add_etat']);
         }
 
-        if (isset($_SESSION['error_delete_usager']) && ($_SESSION['error_delete_usager'] == false)) {
-            alert('success', "l'usager est bien supprimé");
-            unset($_SESSION['error_delete_usager']);
-        }
-
-        if (isset($_SESSION['error_delete_usager']) && ($_SESSION['error_delete_usager'] == false)) {
-            alert('success', "l'usager est bien supprimé");
-            unset($_SESSION['error_delete_usager']);
+        if (isset($_SESSION['error_delete_etat']) && ($_SESSION['error_delete_etat'] == false)) {
+            alert('success', "l'état est bien supprimé");
+            unset($_SESSION['error_delete_etat']);
         }
         ?>
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-
-
 
             <table class="table">
                 <thead class='thead-dark'>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Prénom</th>
-                        <th scope="col">Adresse</th>
-                        <th scope="col">Ville</th>
-                        <th scope="col">Code postal</th>
-                        <th scope="col">Email</th>
+                        <th scope="col">Libelle</th>
                         <th scope="col">Modifier</th>
                         <th scope="col">Supprimer</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($usagers as $usager) : ?>
+                    <?php foreach ($etats as $etat) : ?>
                         <tr>
                             <!-- AFFICHAGE DES CHAMPS -->
-                            <th scope="row"><?= $usager['id'] ?></th>
-                            <td><?= $usager['nom'] ?></td>
-                            <td><?= $usager['prenom'] ?></td>
-                            <td><?= $usager['adresse'] ?></td>
-                            <td><?= $usager['ville'] ?></td>
-                            <td><?= $usager['code_postal'] ?></td>
-                            <td><?= $usager['mail'] ?></td>
-                            <td><a href="<?= URL_ADMIN ?>usager/update.php?id=<?= $usager['id'] ?>" class="btn btn-warning">Modifier</a></td>
-                            <td><a href="<?= URL_ADMIN ?>usager/action.php?id=<?= $usager['id'] ?>" class="btn btn-danger">Supprimer</a></td>
+                            <th scope="row"><?= $etat['id'] ?></th>
+                            <td><?= $etat['libelle'] ?></td>
+                            <td><a href="<?= URL_ADMIN ?>etat/update.php?id=<?= $etat['id'] ?>" class="btn btn-warning">Modifier</a></td>
+                            <td><a href="<?= URL_ADMIN ?>etat/action.php?id=<?= $etat['id'] ?>" class="btn btn-danger">Supprimer</a></td>
                         </tr>
                     <?php endforeach; ?>
 

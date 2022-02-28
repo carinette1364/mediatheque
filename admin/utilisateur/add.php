@@ -14,6 +14,14 @@ if(!isAdmin()) {
 }
 include '../includes/bdd.php';
 // include PATH_ADMIN . 'includes/bdd.php';
+
+$sql = "SELECT * FROM role";
+$requete = $bdd->query($sql);
+$roles = $requete->fetchAll(PDO::FETCH_ASSOC);
+// var_dump($roles);
+// die;
+
+
 ?>
 
 
@@ -38,6 +46,7 @@ include '../includes/bdd.php';
     <!-- Custom styles for this template-->
     <link href="<?= URL_ADMIN ?>/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- <link href="../css/sb-admin-2.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 
@@ -113,6 +122,17 @@ include '../includes/bdd.php';
                     <div class="mb-3">
                         <label for="avatar" class="form-label">Avatar :</label>
                         <input type="file" name="avatar" class="form-control" id="avatar">
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="role" class="form-label mt-5">Roles :</label>
+                                <select class="select-role w-25" name="role[]" multiple id='role'>
+                                    <?php foreach($roles as $role) : ?>
+                                        <option value="<?= $role['id']?>"><?= $role['libelle'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <!-- //selected après "php categories id" -->
+                        </div>
+                    </div>
                     </div>
                     <div class="btn d-flex mx-auto" style="width: 200px">
                         <div class="mb-3 text-center">
@@ -138,3 +158,9 @@ include '../includes/bdd.php';
     <?php
     include PATH_ADMIN . 'includes/footer.php';
     ?>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+        $('.select-role').select2();
+       
+    </script>
