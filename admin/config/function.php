@@ -214,6 +214,12 @@ function getEditeurs($_id_editeur, $_bdd){
 }
 
 
+
+
+        
+
+
+
             
 
                         

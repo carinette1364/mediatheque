@@ -31,6 +31,8 @@ if (!isConnect()) {
 
     <!-- Custom styles for this template-->
     <link href="<?= URL_ADMIN ?>css/sb-admin-2.min.css" rel="stylesheet">
+    
+    
 
 </head>
 

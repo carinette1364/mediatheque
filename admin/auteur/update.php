@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
         // $sql = "SELECT * FROM contact WHERE id = " . $_GET['id'];
         $sql = "SELECT * FROM auteur WHERE id = ?"; //? parce qu'on a qu'une valeur, si plusieurs mettre les flags ex :id, :nom etc
         //le $_GET['id'] c'est celui du html et pas de la base de données, c'est celui qu'on a passé après le ? dans l'adresse du bouton modifier du html
-        var_dump($sql);
+        // var_dump($sql);
         //EXECUTER LA REQUETE
         $requete = $bdd->prepare($sql);
         $requete->execute(array($id));

@@ -1,5 +1,11 @@
 <?php
+// include '../config/config.php';
+// include '../includes/bdd.php';
 include '../config/config.php';
+if (!isConnect()) {
+    header('location:' . URL_ADMIN .'login.php');
+    die;
+}
 include '../includes/bdd.php';
 ?>
 
@@ -8,14 +14,16 @@ include '../includes/bdd.php';
 $sql = 'SELECT * FROM livre WHERE disponibilite = 0';
 $requete = $bdd->query($sql);
 $livres = $requete->fetchAll(PDO::FETCH_ASSOC);
+// var_dump($livres);
+// die;
 
-$sql = 'SELECT * FROM etat';
-$requete = $bdd->query($sql);
-$etats = $requete->fetchAll(PDO::FETCH_ASSOC);
 
 $sql = 'SELECT * FROM usager';
 $requete = $bdd->query($sql);
 $usagers = $requete->fetchAll(PDO::FETCH_ASSOC);
+// var_dump($usagers);
+
+
 
 ?>
 
@@ -40,6 +48,7 @@ $usagers = $requete->fetchAll(PDO::FETCH_ASSOC);
     <!-- Custom styles for this template-->
     <link href="<?= URL_ADMIN ?>/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- <link href="../css/sb-admin-2.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 
@@ -64,7 +73,8 @@ $usagers = $requete->fetchAll(PDO::FETCH_ASSOC);
         <!-- Page Heading -->
 
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <?php
+
+        <?php
             // var_dump($_SESSION);
             if (isset($_SESSION['error_add_location']) && ($_SESSION['error_add_location'] == true)) {
                 alert('danger', "la location n'est pas ajoutée");
@@ -72,6 +82,7 @@ $usagers = $requete->fetchAll(PDO::FETCH_ASSOC);
             };
 
             ?>
+           
 
             <div class="container">
                 <h1 class="text-center">Ajouter une location</h1>
@@ -79,7 +90,7 @@ $usagers = $requete->fetchAll(PDO::FETCH_ASSOC);
                    <div class="row mt-5">
                    <div class="mb-3 col">
                             <label for="livre" class="form-label">Livre :</label>
-                                <select class="select-livre w-75" name="livre[]" multiple id='livre'>
+                                <select class="select-livre w-75" name="livre"  id='livre'>
                                     <?php foreach($livres as $livre) : ?>
                                         <option value="<?= $livre['id']?>"><?= $livre['titre'] ?></option>
                                     <?php endforeach; ?>
@@ -87,17 +98,8 @@ $usagers = $requete->fetchAll(PDO::FETCH_ASSOC);
                                 <!-- //selected après "php categories id" -->
                     </div>
                     <div class="mb-3 col">
-                            <label for="etat" class="form-label">Etat :</label>
-                                <select class="select-etat w-75" name="etat[]" multiple id='etat'>
-                                    <?php foreach($etats as $etat) : ?>
-                                        <option value="<?= $etat['id']?>"><?= $etat['libelle'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <!-- //selected après "php categories id" -->
-                    </div>
-                    <div class="mb-3 col">
                             <label for="usager" class="form-label">usager :</label>
-                                <select class="select-usager w-75" name="usager[]" multiple id='usager'>
+                                <select class="select-usager w-75" name="usager"   id='usager'>
                                     <?php foreach($usagers as $usager) : ?>
                                         <option value="<?= $usager['id']?>"><?= $usager['nom'] . '  ' . $usager['prenom']?></option>
                                     <?php endforeach; ?>
@@ -135,3 +137,10 @@ $usagers = $requete->fetchAll(PDO::FETCH_ASSOC);
     <?php
     include PATH_ADMIN . 'includes/footer.php';
     ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $('.select-livre').select2();
+        $('.select-usager').select2();
+       
+    </script>

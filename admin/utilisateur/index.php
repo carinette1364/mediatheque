@@ -14,9 +14,9 @@ if(!isAdmin()) {
 include '../includes/bdd.php';
 // include PATH_ADMIN . 'includes/bdd.php';
 
-$sql = 'SELECT * FROM utilisateur';
-$requete = $bdd->query($sql);
-$utilisateurs = $requete->fetchAll(PDO::FETCH_ASSOC);
+// $sql = 'SELECT * FROM utilisateur';
+// $requete = $bdd->query($sql);
+// $utilisateurs = $requete->fetchAll(PDO::FETCH_ASSOC);
 // var_dump($utilisateurs);
 // die;
 
